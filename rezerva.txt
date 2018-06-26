@@ -1,0 +1,170 @@
+import os
+import random
+import time
+import numpy as np
+from scipy.stats import norm
+from sklearn import mixture
+
+
+rezkombs = [];
+jedinices=0;
+dvojkes=0;
+trojkes=0;
+cetvorkes=0;
+petices=0;
+sestices=0;
+trojke_nizs=0;
+cetvorke_nizs=0;
+fuls=0;
+mala_kentas=0;
+velika_kentas=0;
+jambs=0;
+sansas=0;
+
+nazkombs = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "trojke_niz", "cetvorke_niz", "ful, mala_kenta", "velika_kenta", "jamb", "sansa"]; 
+
+def pbgen():        #generator kockice
+    kockice = [];
+    for i in range(5):
+        kockice.append(random.randint(1, 6));
+    kockice.sort();
+    return kockice;
+
+def dbgen(n, kockice):      #random generator drugog bacanja
+    kockice2=kockice;
+    for i in range(n):
+        k=random.randint(0, 4);
+        kockice2[k]=random.randint(1, 6);
+        kockice2.sort();
+    return kockice2;
+       
+def izvod(kockice):     #racuna n[i+1] - n[i]
+    izvodkoc = [];
+    for i in range(5):
+        izvodkoc.append(kockice[i+1]-kockice[i]);
+    return izvodkoc;
+
+def count(broj, niz):       #broji kolika ima "broja" u "nizu"
+    bb=0;
+    for i in range(len(niz)):
+        if niz[i]==broj:
+            bb=bb+1;
+    return bb;
+
+def trans(niz):     #pravi hostogram [n1 n2 n3 n4 n5 n6] kolika ima 1,2,...,6 u kombinaciji npr. [2 2 3 3 3] -> [0 2 3 0 0 0] 
+    n1=count(1, niz);
+    n2=count(2, niz);
+    n3=count(3, niz);
+    n4=count(4, niz);
+    n5=count(5, niz);
+    n6=count(6, niz);
+    trniz=[n1, n2, n3, n4, n5, n6];
+    return trniz;
+
+def intrans(trniz):     #pravi kombinaciju od histograma npr. [0 2 3 0 0 0] -> [2 2 3 3 3]
+    oniz=[];
+    for i in range(trniz[0]):
+        oniz.append(1);
+    for i in range(trniz[1]):
+        oniz.append(2);
+    for i in range(trniz[2]):
+        oniz.append(3);
+    for i in range(trniz[3]):
+        oniz.append(4);
+    for i in range(trniz[4]):
+        oniz.append(5);
+    for i in range(trniz[5]):
+        oniz.append(6);
+    return oniz;
+
+def suma(niz):      #racuna sumu svih elementa u nizu
+    s=0
+    for i in range(len(niz)):
+        s=s+niz[i];
+    return s;
+
+def vrv(x, z):      #izracunava kolika je sansa da se u sledecem bacanju dobije kombinacija "z", ako imamo kombinaciju "x"
+    tx= trans(x);
+    r=[];
+    vnn=[];
+    ns=0;
+    v=1;
+    tz=trans(z);
+    for i in range(6):
+        r.append(tx[i]-tz[i]);
+    for i in range(6):
+        if r[i] > 0:
+            vnn.append(r[i]);
+    ns=suma(vnn);
+    v=(1/6)**ns;
+    return v;
+
+def zamena(x, z):       #menja nepotrebne kockice iz dobijene kombinacije "x", da bi se dobila kombinacija "z"
+    inn=[];
+    vnn=[]
+    r=[];
+    tx=trans(x);
+    tz=trans(z);
+    for i in range(6):
+        r.append(tx[i]-tz[i]);
+    for i in range(6):
+        if r[i]>0:
+            vnn.append(r[i]);
+            inn.append(i);
+    for i in range(len(inn)):
+        tx[inn[i]]=0;
+    for i in range((suma(vnn))):
+        k=random.randint(0, 5)
+        tx[k]=tx[k]+1;
+    x=intrans(tx);
+    return x;
+    
+#===================test==================
+x=[2, 3, 3, 3, 5];
+z=[3, 3, 3, 3, 3];
+n=zamena(zamena(x, z), z); # posle dve zamene 
+print("{0}    {1}    {2}    {3}".format(x, z, n, vrv(x, z)));
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+
+        
+
+    
+
+
+
