@@ -1,0 +1,187 @@
+import os
+import random
+import time
+import numpy as np
+
+rezkomb = [];
+jed=0;
+dvoj=0;
+troj=0;
+cetvor=0;
+pet=0;
+sest=0;
+trojken=0;
+cetvorken=0;
+f=0;
+malak=0;
+velikak=0;
+jam=0;
+san=0;
+
+nazkomb = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "trojke_niz", "cetvorke_niz", "ful, mala_kenta", "velika_kenta", "jamb", "sansa"]; 
+
+def pbgen():
+    kockice = [];
+    for i in range(5):
+        kockice.append(random.randint(1, 6));
+    kockice.sort();
+    return kockice;
+
+def dbgen(n, kockice):
+    kockice2=kockice;
+    for i in range(n):
+        k=random.randint(0, 4);
+        kockice2[k]=random.randint(1, 6);
+        kockice2.sort();
+    return kockice2;
+       
+def izvod(kockice):
+    izvodkoc = [];
+    for i in range(4):
+        izvodkoc.append(kockice[i+1]-kockice[i]);
+    return izvodkoc;
+
+def count(broj, niz):
+    bb=0;
+    for i in range(len(niz)):
+        if niz[i]==broj:
+            bb=bb+1;
+    return bb;
+
+def trans(niz):
+    n1=count(1, niz);
+    n2=count(2, niz);
+    n3=count(3, niz);
+    n4=count(4, niz);
+    n5=count(5, niz);
+    n6=count(6, niz);
+    trniz=[n1, n2, n3, n4, n5, n6];
+    trniz.sort();
+    return trniz;
+
+def intrans(trniz):
+    oniz=[];
+    for i in range(trniz[0]):
+        oniz.append(1);
+    for i in range(trniz[1]):
+        oniz.append(2);
+    for i in range(trniz[2]):
+        oniz.append(3);
+    for i in range(trniz[3]):
+        oniz.append(4);
+    for i in range(trniz[4]):
+        oniz.append(5);
+    for i in range(trniz[5]):
+        oniz.append(6);
+    return oniz;
+
+def suma(niz):
+    s=0
+    for i in range(len(niz)):
+        s=s+niz[i];
+    return s;
+
+br=13;
+i=0;
+while i<br:
+    kockice=pbgen();#
+    n=random.randint(0, 5);
+    dbgen(n, kockice);
+    izkock=izvod(kockice);
+    k=random.randint(0, len(nazkomb)-1);
+    n0=0;
+    n1=0;
+    nx=0;
+    if nazkomb[k] == "jedinice":
+        jed = count(1, kockice)*1;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "dvojke":
+        dvoj = count(2, kockice)*2;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "trojke":
+        troj = count(3, kockice)*3;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "cetvorke":
+        cetvor = count(4, kockice)*4;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "petice":
+        pet = count(5, kockice)*5;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "sestice":
+        sest = count(6, kockice)*6;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "trojke_niz":
+        n0=count(0, izkock);""
+        if n0==2:
+            trojken=suma(kockice);
+        else:
+            trojken=0;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "cetvorke_niz":
+        n0=count(0, izkock);
+        if n0==3 and (izkock[0]>=1 or izkock[3]>=1):
+            cetvorken=suma(kockice);
+        else:
+            cetvorken=0;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "ful":
+        n0=count(0, izkock);
+        if n0==3 and (izkock[1]>=1 or izkock[2]>=1):
+            f=25;
+        else:
+            f=0;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "mala_kenta":
+       n1=count(1, izkock);
+       if n1==3:
+            malak=30;
+       else:
+            malak=0;
+       rezkomb.append(nazkomb.pop(k));
+       br=br-1;
+    elif nazkomb[k] == "velika_kenta":
+        n1=count(1, izkock);
+        if n1==4:
+            velikak=40;
+        else:
+            velikak=0;
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "sansa":
+        san=suma(kockice);
+        rezkomb.append(nazkomb.pop(k));
+        br=br-1;
+    elif nazkomb[k] == "jamb":
+        n0=count(0, izkock);
+        if n0==4:
+            jam=50;
+            br=br-1;
+        else:
+            jam=0;
+            br=br-1;
+
+vredkomb = [jed, dvoj, troj, cetvor, pet, sest, trojken, cetvorken, f, malak, velikak, jam, san];
+
+print("{0}     {1} \n".format("Jedinice:", jed));
+print("{0}     {1} \n".format("Dvojke:", dvoj));
+print("{0}     {1} \n".format("Trojke:", troj));
+print("{0}     {1} \n".format("Cetvorke:", cetvor));
+print("{0}     {1} \n".format("Petice:", pet));
+print("{0}     {1} \n".format("Sestice:", sest));
+print("{0}     {1} \n".format("Tri U Nizu:", trojken));
+print("{0}     {1} \n".format("Cetri U Nizu:", cetvorken));
+print("{0}     {1} \n".format("Ful:", f));
+print("{0}     {1} \n".format("Mala Kenta:", malak));
+print("{0}     {1} \n".format("Velika Kenta:", velikak));
+print("{0}     {1} \n".format("Jamb:", jam));
+print("{0}     {1} \n".format("Sansa:", san));
+print("{0}     {1} \n".format("Suma:", sum(vredkomb)));
