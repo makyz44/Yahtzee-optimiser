@@ -18,6 +18,7 @@ rezvredkombsp1 = []
 rezvredkombsp2 = []
 rezvredkombun1 = []
 rezvredkombun2 = []
+rezvremkombs=[]
 
 nazkombd = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "maximum", "minimum", "kenta", "triling", "ful", "kare", "jamb"]
 vredkombd = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
