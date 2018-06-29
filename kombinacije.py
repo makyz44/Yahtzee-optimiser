@@ -1,6 +1,6 @@
 import os
 import random
-import funkcija
+import funkcije
 
 
 reznazkombd = []
@@ -38,4 +38,3 @@ nazkombun1= ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "m
 vredkombun1 = [0, 0, 0, 0, 0, 0, 0]
 nazkombun2= ["jamb", "kare", "ful", "triling", "kenta", "minimum"]
 vredkombun2 = [0, 0, 0, 0, 0, 0]
-
