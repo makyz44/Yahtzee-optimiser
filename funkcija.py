@@ -2,8 +2,6 @@ import kombinacije
 import random
 import os
 
-
-
 imekombinacija = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "maximum", "minimum", "kenta", "triling", "ful", "kare", "jamb"]
 
 #Generator prvog bacanja(kockice)
@@ -75,7 +73,7 @@ def suma(niz):
 
 #Izracunava verovatnocu x od z
 def vrv(x, z):    
-    if z==[]:
+    if z==[] or z==[0, 0, 0, 0, 0]:
         v=0
     else:
         tx= arrtohis(x)
@@ -175,7 +173,6 @@ def najvrv123456(x, string):
         if string==imekombinacija[t]:
             for i in range(6):
                 for j in range(6):
-                    if j>=i:
                         k=[t+1, t+1, t+1]
                         k.extend([i+1, j+1])
                         k.sort()
@@ -274,6 +271,20 @@ def najvrvdkolona(x, string):
         dk=[z, z, z, z, z]
     return dk
 
+##Bez obzira na kombinaciju racuna najpogodniji niz
+#def najpogodnijiniz(x, string):
+#    niz=[];
+#    for i in range(6):
+#        if string == imekombinacija[i]:
+#            niz = najvrv123456(x, string);
+#    if string==imekombinacija[6] or string==imekombinacija[7]:
+#            niz = najvrvmnmx(x, string)
+#    else:
+#        for i in range(8, 13):
+#            if string==imekombinacija[i]:
+#                niz = najvrvdkolona(x, string)
+#    return niz
+
 #Bez obzira na kombinaciju racuna najpogodniji niz
 def najpogodnijiniz(x, string):
     niz=[];
@@ -282,9 +293,12 @@ def najpogodnijiniz(x, string):
             niz = najvrv123456(x, string);
     if string==imekombinacija[6] or string==imekombinacija[7]:
             niz = najvrvmnmx(x, string)
-    else:
-        for i in range(8, 13):
+    for i in range(8, 13):
             if string==imekombinacija[i]:
                 niz = najvrvdkolona(x, string)
+            else:
+                niz=[0, 0, 0, 0, 0]
     return niz
+
+
 
