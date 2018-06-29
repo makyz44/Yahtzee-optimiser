@@ -24,6 +24,7 @@ vredkombd = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 nazkombs = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "maximum", "minimum", "kenta", "triling", "ful", "kare", "jamb"]
 vredkombs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+vremkombs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 nazkombg = ["jamb", "kare", "ful", "triling", "kenta", "minimum", "maximum", "sestice", "petice", "cetvorke", "trojke", "dvojke", "jedinice"]
 vredkombg = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
