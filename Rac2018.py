@@ -63,7 +63,6 @@ while brojac<brojpoteza:
                     if vers>refvers:
                         refvers=vers
                         zs=i
-                print(zs)
                 if funkcije.vrv(n2, nizkombinacijes[zs]) == 1:
                     vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
                     rezvredkolone[6].append(vredkolone[6].pop(zs))
