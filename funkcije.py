@@ -115,7 +115,7 @@ def zamena(x, z):
     return n
 
 #Racunanje bodova kombinacije x u zavisnosti od imena kombinacije
-def bodovi(x, string):
+def bodovi(x, string=None):
     p=izvod(x)
     b=0
     for i in range(6):
@@ -161,6 +161,8 @@ def bodovi(x, string):
             b=z*5+50
         else:
            b=0
+    else:
+        b=0
     return b
 
 #Nalazi niz "jedinice", "dvojke",...,"sestice" sa najvecom verovatncom da se dobije za kombinaciju x
