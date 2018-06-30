@@ -5,10 +5,10 @@ import funkcije
 import kombinacije
 
 def heuristika2():
-    nazkolone=[kombinacije.nazkombd, kombinacije.nazkombg, kombinacije.nazkombsp1, kombinacije.nazkombsp2, kombinacije.nazkombun1, kombinacije.nazkombun2, kombinacije.nazkombs]
-    reznazkolone=[kombinacije.reznazkombd, kombinacije.reznazkombg, kombinacije.reznazkombsp1, kombinacije.reznazkombsp2, kombinacije.reznazkombun1, kombinacije.reznazkombun2, kombinacije.reznazkombs]
-    vredkolone=[kombinacije.vredkombd, kombinacije.vredkombg, kombinacije.vredkombsp1, kombinacije.vredkombsp2, kombinacije.vredkombun1, kombinacije.vredkombun2, kombinacije.vredkombs]
-    rezvredkolone=[kombinacije.rezvredkombd, kombinacije.rezvredkombg, kombinacije.rezvredkombsp1, kombinacije.rezvredkombsp2, kombinacije.rezvredkombun1, kombinacije.rezvredkombun2, kombinacije.rezvredkombs]
+    nazkolone=[kombinacije.nazkombd[:], kombinacije.nazkombg[:], kombinacije.nazkombsp1[:], kombinacije.nazkombsp2[:], kombinacije.nazkombun1[:], kombinacije.nazkombun2[:], kombinacije.nazkombs[:]]
+    reznazkolone=[kombinacije.reznazkombd[:], kombinacije.reznazkombg[:], kombinacije.reznazkombsp1[:], kombinacije.reznazkombsp2[:], kombinacije.reznazkombun1[:], kombinacije.reznazkombun2[:], kombinacije.reznazkombs[:]]
+    vredkolone=[kombinacije.vredkombd[:], kombinacije.vredkombg[:], kombinacije.vredkombsp1[:], kombinacije.vredkombsp2[:], kombinacije.vredkombun1[:], kombinacije.vredkombun2[:], kombinacije.vredkombs[:]]
+    rezvredkolone=[kombinacije.rezvredkombd[:], kombinacije.rezvredkombg[:], kombinacije.rezvredkombsp1[:], kombinacije.rezvredkombsp2[:], kombinacije.rezvredkombun1[:], kombinacije.rezvredkombun2[:], kombinacije.rezvredkombs[:]]
 
     brojpoteza=65
     brojac=0
@@ -33,8 +33,8 @@ def heuristika2():
             ver=funkcije.vrv(x, nz)
             nizverovatnoce.append(ver)
             if ver>refver:
-                refver=ver
-                z=i
+                 refver=ver
+                 z=i
         if funkcije.vrv(x, nizkombinacije[z]) == 1:
             vredkolone[z][0]=funkcije.bodovi(x, nazkolone[z][0])
             rezvredkolone[z].append(vredkolone[z].pop(0))
@@ -94,12 +94,20 @@ def heuristika2():
                                     reznazkolone[6].append(nazkolone[6].pop(zs))
                                 else:
                                     if len(vredkolone[z])!=0 or len(nazkolone[z])!=0:
+                                        vredkolone[z][0]=funkcije.bodovi(n2, vredkolone[z][0])
                                         rezvredkolone[z].append(vredkolone[z].pop(0))
                                         reznazkolone[z].append(nazkolone[z].pop(0))
                                     else:
                                         continue
             
         brojac=brojac+1
+
+    brojbodova0=funkcije.suma(rezvredkolone[0])-rezvredkolone[0][6]-rezvredkolone[0][7]+rezvredkolone[0][6]-rezvredkolone[0][7]
+    brojbodova1=funkcije.suma(rezvredkolone[1])-(rezvredkolone[1][5]+rezvredkolone[1][6])+(rezvredkolone[1][6]-rezvredkolone[1][5])
+    brojbodova34=funkcije.suma(rezvredkolone[2])+funkcije.suma(rezvredkolone[3])-(rezvredkolone[2][0]+rezvredkolone[3][0])+(rezvredkolone[2][0]-rezvredkolone[3][0])
+    brojbodova56=funkcije.suma(rezvredkolone[4])+funkcije.suma(rezvredkolone[5])-(rezvredkolone[4][6]+rezvredkolone[5][5])+(rezvredkolone[4][6]-rezvredkolone[5][5])
+    brojbodovaslobodne=funkcije.suma(rezvredkolone[6])-(rezvredkolone[6][6]+rezvredkolone[6][7])+(rezvredkolone[6][6]-rezvredkolone[6][7])
+    ukupnobodova=brojbodova0+brojbodova1+brojbodova34+brojbodova56+brojbodovaslobodne
     return rezvredkolone
 
 print(heuristika2())
