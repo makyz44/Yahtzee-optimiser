@@ -174,11 +174,10 @@ def najvrv123456(x, string):
     for t in range(6):
         if string==imekombinacija[t]:
             for i in range(6):
-                for j in range(6):
-                        k=[t+1, t+1, t+1]
-                        k.extend([i+1, j+1])
-                        k.sort()
-                        uk.append(k)
+                k=[t+1, t+1, t+1, t+1]
+                k.extend([i+1])
+                k.sort()
+                uk.append(k)
             for i in range(len(uk)):
                 nv.append(vrv(x, uk[i]))
             for i in range(len(nv)):
@@ -233,7 +232,6 @@ def najvrvdkolona(x, string):
     elif string == "ful":
         for i in range(6):
                 for j in range(6):
-                    if j>=3:
                         k=[i+1, i+1, j+1, j+1, j+1]
                         k.sort()
                         uk.append(k)
@@ -305,3 +303,8 @@ def najpogodnijiniz(x, string=None):
     if br==0 or string==None:
         niz=[0, 0, 0, 0, 0]
     return niz
+
+def koef(bodovi, verovatnoca):
+    k=bodovi*verovatnoca
+    return k
+
