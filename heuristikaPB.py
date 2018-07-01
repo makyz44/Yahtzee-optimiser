@@ -113,14 +113,18 @@ while brojac<brojpoteza:
         vredkolone[z][0]=funkcije.bodovi(n2, nazkolone[z][0])
         rezvredkolone[z].append(vredkolone[z].pop(0))
         reznazkolone[z].append(nazkolone[z].pop(0))
-    elif nizkoeficijenata[z]<nizkoeficijenatas[zs] and len(nazkolone[6])!=0:
+        continue
+    elif nizkoeficijenata[z]<nizkoeficijenatas[zs]:
         vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
         rezvredkolone[6].append(vredkolone[6].pop(zs))
         reznazkolone[6].append(nazkolone[6].pop(zs))
-    else:
         continue
-    brojac=brojac+1
     print(brojac)
+    brojac=brojac+1
+
+print(rezvredkolone)
+
+
 
 
     
