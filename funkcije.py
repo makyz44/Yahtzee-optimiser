@@ -115,13 +115,22 @@ def zamena(x, z):
     return n
 
 #Racunanje bodova kombinacije x u zavisnosti od imena kombinacije
-def bodovi(x, string=None):
+def bodovi(x, string):
     p=izvod(x)
     b=0
-    for i in range(6):
-        if string==imekombinacija[i]:
-            b=izbroji(i+1, x)*(i+1)
-    if string=="maximum":
+    if string=="jedinice":
+        b=izbroji(1, x)*1
+    elif string=="dvojke":
+        b=izbroji(2, x)*2
+    elif string=="trojke":
+        b=izbroji(3, x)*3
+    elif string=="cetvorke":
+        b=izbroji(4, x)*4
+    elif string=="petice":
+        b=izbroji(5, x)*5
+    elif string=="sestice":
+        b=izbroji(6, x)*6
+    elif string=="maximum":
         b=suma(x);
     elif string=="minimum":
         b=suma(x);
@@ -161,7 +170,7 @@ def bodovi(x, string=None):
             b=z*5+50
         else:
            b=0
-    else:
+    elif string==None:
         b=0
     return b
 
