@@ -45,11 +45,7 @@ while brojac<brojpoteza:
     nizkombinacije=[]
     nizverovarnoce=[]
     nizkoeficijenata=[]
-    nizkombinacijes=[]
-    nizverovatnoces=[]
-    nizkoeficijenatas=[]
     nizbodova=[]
-    nizbodovas=[]
     refkoef=0;
     for i in range(len(nazkolone)-1):
         if len(nazkolone[i])==0:
@@ -71,12 +67,8 @@ while brojac<brojpoteza:
     nizkombinacije=[]
     nizverovarnoce=[]
     nizkoeficijenata=[]
-    nizkombinacijes=[]
-    nizverovatnoces=[]
-    nizkoeficijenatas=[]
     nizbodova=[]
-    nizbodovas=[]
-    refkoef=0;
+    refkoef=0
     for i in range(len(nazkolone)-1):
         if len(nazkolone[i])==0:
             l="*"
@@ -95,36 +87,29 @@ while brojac<brojpoteza:
             z=i
     for i in range(len(nazkolone[6])):
         if len(nazkolone[6])==0:
-            l="*"
+            m="*"
         else:
-            l=nazkolone[6][i]
-        nizs=funkcije.najpogodnijiniz(n2, l)
+            m=nazkolone[6][i]
+        nizs=funkcije.najpogodnijiniz(n2, m)
         nizkombinacijes.append(nizs)
         vers=funkcije.vrv(n2, nizs)
         nizverovatnoces.append(vers)
-        bods=funkcije.bodovi(nizs, l)
+        bods=funkcije.bodovi(nizs, m)
         nizbodovas.append(bods)
         koefs=bods*vers*0.5
         nizkoeficijenatas.append(koefs)
         if koefs>refkoefs:
             refkoefs=koefs
             zs=i
-    if nizkoeficijenata[z]>=nizkoeficijenatas[zs] and len(nazkolone[z])!=0:
-        vredkolone[z][0]=funkcije.bodovi(n2, nazkolone[z][0])
-        rezvredkolone[z].append(vredkolone[z].pop(0))
-        reznazkolone[z].append(nazkolone[z].pop(0))
-        continue
-    elif nizkoeficijenata[z]<nizkoeficijenatas[zs]:
-        vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
-        rezvredkolone[6].append(vredkolone[6].pop(zs))
-        reznazkolone[6].append(nazkolone[6].pop(zs))
-        continue
-    print(brojac)
+    print(nizkoeficijenata, nizkoeficijenatas, z, zs)
+    #if nizkoeficijenata[z]>=nizkoeficijenatas[zs] and len(nazkolone[z])!=0:
+    #    vredkolone[z][0]=funkcije.bodovi(n2, nazkolone[z][0])
+    #    rezvredkolone[z].append(vredkolone[z].pop(0))
+    #    reznazkolone[z].append(nazkolone[z].pop(0))
+    #elif nizkoeficijenatas[zs]>nizkoeficijenata[z] and len(nazkolone[6])!=0:
+    #    vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
+    #    rezvredkolone[6].append(vredkolone[6].pop(zs))
+    #    reznazkolone[6].append(nazkolone[6].pop(zs))
     brojac=brojac+1
-
-print(rezvredkolone)
-
-
-
 
     
