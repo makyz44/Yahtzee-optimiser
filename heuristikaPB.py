@@ -36,7 +36,7 @@ while brojac<brojpoteza:
         nizverovarnoce.append(ver)
         bod=funkcije.bodovi(niz, l)
         nizbodova.append(bod)
-        koef=bod*ver
+        koef=funkcije.koef(bod, ver)
         nizkoeficijenata.append(koef)
         if koef>refkoef:
             refkoef=koef
@@ -58,7 +58,7 @@ while brojac<brojpoteza:
         nizverovarnoce.append(ver)
         bod=funkcije.bodovi(niz, l)
         nizbodova.append(bod)
-        koef=bod*ver
+        koef=funkcije.koef(bod, ver)
         nizkoeficijenata.append(koef)
         if koef>refkoef:
             refkoef=koef
@@ -80,7 +80,7 @@ while brojac<brojpoteza:
         nizverovarnoce.append(ver)
         bod=funkcije.bodovi(niz, l)
         nizbodova.append(bod)
-        koef=bod*ver
+        koef=funkcije.koef(bod, ver)
         nizkoeficijenata.append(koef)
         if koef>refkoef:
             refkoef=koef
@@ -101,15 +101,18 @@ while brojac<brojpoteza:
         if koefs>refkoefs:
             refkoefs=koefs
             zs=i
-    print(nizkoeficijenata, nizkoeficijenatas, z, zs)
-    #if nizkoeficijenata[z]>=nizkoeficijenatas[zs] and len(nazkolone[z])!=0:
-    #    vredkolone[z][0]=funkcije.bodovi(n2, nazkolone[z][0])
-    #    rezvredkolone[z].append(vredkolone[z].pop(0))
-    #    reznazkolone[z].append(nazkolone[z].pop(0))
-    #elif nizkoeficijenatas[zs]>nizkoeficijenata[z] and len(nazkolone[6])!=0:
-    #    vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
-    #    rezvredkolone[6].append(vredkolone[6].pop(zs))
-    #    reznazkolone[6].append(nazkolone[6].pop(zs))
+    if len(nazkolone[z])>0:
+        vredkolone[z][0]=funkcije.bodovi(n2, nazkolone[z][0])
+        rezvredkolone[z].append(vredkolone[z].pop(0))
+        reznazkolone[z].append(nazkolone[z].pop(0))
+    elif len(nazkolone[6])>0:
+        vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
+        rezvredkolone[6].append(vredkolone[6].pop(zs))
+        reznazkolone[6].append(nazkolone[6].pop(zs))
     brojac=brojac+1
+#    print(nizkoeficijenata, len(nazkolone[z]), z)
+    print(rezvredkolone)
+
+
 
     
