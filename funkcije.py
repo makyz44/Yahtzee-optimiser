@@ -1,6 +1,7 @@
 import kombinacije
 import random
 import os
+import matplotlib as plt
 
 imekombinacija = ["jedinice", "dvojke", "trojke", "cetvorke", "petice", "sestice", "maximum", "minimum", "kenta", "triling", "ful", "kare", "jamb"]
 
@@ -139,6 +140,11 @@ def bodovi(x, string):
             b=suma(x)
         else:
             b=0
+    elif string=="kenta":
+        if x==[1, 2, 3, 4, 5] or x==[2, 3, 4, 5, 6]:
+            b=suma(x)+20
+        else:
+            b=0
     elif string == "ful":
         if izbroji(0, p)>=3 and (p[1]>=1 or p[2]>=1):
             b=suma(x)+30
@@ -197,10 +203,50 @@ def najvrv123456(x, string):
 
 #Radi isto kao i prethodna f-ja, samo sto je ova za max i min
 def najvrvmnmx(x, string):
+    rmin=[]
+    kmin=[]
+    rmax=[]
+    kmax=[]
+    minniz=[[1, 1, 1, 1, 1], [1, 1, 1, 1, 2], [1, 1, 1, 2, 2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 2], [1, 1, 1, 1, 3], [1, 1, 1, 2, 3], [1, 1, 1, 3, 3], [1, 1, 2, 2, 3]]
+    maxniz=[[5, 5, 5, 5, 5], [4, 5, 5, 5, 6], [5, 5, 5, 5, 6], [4, 4, 5, 6, 6], [3, 5, 5, 6, 6], [4, 5, 5, 6, 6], [5, 5, 5, 6, 6], [3, 4, 6, 6, 6], [4, 4, 6, 6, 6], [2, 5, 6, 6, 6], [3, 5, 6, 6, 6], [4, 5, 6, 6, 6], [5, 5, 6, 6, 6], [1, 6, 6, 6, 6], [2, 6, 6, 6, 6], [3, 6, 6, 6, 6], [4, 6, 6, 6, 6], [5, 6, 6, 6, 6], [6, 6, 6, 6, 6]]
+    minvrv=[]
+    maxvrv=[]
+    refmin=0
+    refmax=0
+    refbod=0
+    m=0
+    b=0
     if string=="maximum":
-        return najvrv123456(x, "sestice")
+        for i in range(len(maxniz)):
+            rmax.append(vrv(x, maxniz[i]))
+        for i in range(len(rmax)):
+            if rmax[i]>refmax:
+                refmax=rmax[i]
+                m=i
+        for i in range(len(rmax)):
+            if rmax[i]==rmax[m]:
+                kmax.append(maxniz[i])
+        for i in range(len(kmax)):
+            if suma(kmax[i])>refbod:
+                refbod=suma(kmax[i])
+                b=i
+        return maxniz[b]
+
     elif string=="minimum":
-        return najvrv123456(x, "jedinice");
+        for i in range(len(minniz)):
+            rmin.append(vrv(x, minniz[i]))
+        for i in range(len(rmin)):
+            if rmin[i]>refmin:
+                refmin=rmin[i]
+                m=i
+        for i in range(len(rmin)):
+            if rmin[i]==rmin[m]:
+                kmax.append(minniz[i])
+        for i in range(len(kmin)):
+            if suma(kmin[i])<refbod:
+                refbod=suma(kmin[i])
+                b=i
+        return minniz[b]
 
 def najvrvdkolona(x, string):
     brojcifara=[]
@@ -316,4 +362,72 @@ def najpogodnijiniz(x, string=None):
 def koef(bodovi, verovatnoca):
     k=bodovi*verovatnoca
     return k
+
+
+def tezina(string):
+    t=0
+    if string=="jednice":
+        t=12
+    elif string=="dvojke":
+        t=1
+    elif string=="trojke":
+        t=2
+    elif string=="cetvorke":
+        t=3
+    elif string=="petice":
+        t=5
+    elif string=="sestice":
+        t=6
+    elif string=="maximum":
+        t=11
+    elif string=="minimum":
+        t=11
+    elif string=="kenta":
+        t=8
+    elif string=="triling":
+        t=4
+    elif string=="ful":
+        t=7
+    elif string=="kare":
+        t=9
+    elif string=="jamb":
+        t=10
+    else:
+        t=0
+    return t
+    
+
+def najveci(niz):
+    naj=niz[0]
+    for i in range(1, len(niz)):
+        if niz[i]>naj:
+            naj=niz[i]
+    return naj
+
+
+def indexnajveceg(niz):
+    naj=niz[0]
+    k=0
+    for i in range(1, len(niz)):
+        if niz[i]>naj:
+            k=i
+    return k
+
+
+def najmanji(niz):
+    naj=niz[0]
+    for i in range(1, len(niz)):
+        if niz[i]<naj:
+            naj=niz[i]
+    return naj
+
+
+def indexnajmanjeg(niz):
+    naj=niz[0]
+    k=0
+    for i in range(1, len(niz)):
+        if niz[i]<naj:
+            k=i
+    return k
+
 
