@@ -10,6 +10,10 @@ def heuristika2():
     vredkolone=[kombinacije.vredkombd[:], kombinacije.vredkombg[:], kombinacije.vredkombsp1[:], kombinacije.vredkombsp2[:], kombinacije.vredkombun1[:], kombinacije.vredkombun2[:], kombinacije.vredkombs[:]]
     rezvredkolone=[kombinacije.rezvredkombd[:], kombinacije.rezvredkombg[:], kombinacije.rezvredkombsp1[:], kombinacije.rezvredkombsp2[:], kombinacije.rezvredkombun1[:], kombinacije.rezvredkombun2[:], kombinacije.rezvredkombs[:]]
 
+    dtcpsniz=[]
+    jedind=0
+    minind=0
+    maxind=0
     brojpoteza=65
     brojac=0
     while brojac<brojpoteza:
@@ -89,9 +93,18 @@ def heuristika2():
                                             refvers=vers
                                             zs=i
                                 if funkcije.vrv(n2, nizkombinacijes[zs]) == 1:
+                                    if nazkolone[6][zs]=="dvojke" or nazkolone[6][zs]=="trojke" or nazkolone[6][zs]=="cetvorke" or nazkolone[6][zs]=="petice" or nazkolone[6][zs]=="sestice":
+                                        dtcpsniz.append(len(reznazkolone[6]))
+                                    elif nazkolone[6][zs]=="jedinice":
+                                        jedind=len(reznazkolone[6])
+                                    elif nazkolone[6][zs]=="minimum":
+                                        minind=len(reznazkolone[6])
+                                    elif nazkolone[6][zs]=="maximum":
+                                        maxind=len(reznazkolone[6])
                                     vredkolone[6][zs]=funkcije.bodovi(n2, nazkolone[6][zs])
                                     rezvredkolone[6].append(vredkolone[6].pop(zs))
                                     reznazkolone[6].append(nazkolone[6].pop(zs))
+                                    #print(len(nazkolone[6]))
                                 else:
                                     if len(vredkolone[z])!=0 or len(nazkolone[z])!=0:
                                         vredkolone[z][0]=funkcije.bodovi(n2, vredkolone[z][0])
@@ -132,8 +145,12 @@ def heuristika2():
     if bonus4>=60:
         bonus44=30
     ukupnobodova=brojbodova0+brojbodova1+brojbodova34+brojbodova56+brojbodovaslobodne+bonus11+bonus22+bonus33+bonus44
-    return ukupnobodova
+    print(jedind)
+    print(dtcpsniz)
+    print(minind)
+    print(maxind)
+    print(rezvredkolone)
 
-print(heuristika2())
+heuristika2()
 
     
