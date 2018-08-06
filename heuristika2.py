@@ -115,42 +115,83 @@ def heuristika2():
             
         brojac=brojac+1
 
-    brojbodova0=funkcije.suma(rezvredkolone[0])-rezvredkolone[0][6]-rezvredkolone[0][7]+rezvredkolone[0][6]-rezvredkolone[0][7]
-    brojbodova1=funkcije.suma(rezvredkolone[1])-(rezvredkolone[1][5]+rezvredkolone[1][6])+(rezvredkolone[1][6]-rezvredkolone[1][5])
-    brojbodova34=funkcije.suma(rezvredkolone[2])+funkcije.suma(rezvredkolone[3])-(rezvredkolone[2][0]+rezvredkolone[3][0])+(rezvredkolone[2][0]-rezvredkolone[3][0])
-    brojbodova56=funkcije.suma(rezvredkolone[4])+funkcije.suma(rezvredkolone[5])-(rezvredkolone[4][6]+rezvredkolone[5][5])+(rezvredkolone[4][6]-rezvredkolone[5][5])
-    brojbodovaslobodne=funkcije.suma(rezvredkolone[6])-(rezvredkolone[6][6]+rezvredkolone[6][7])+(rezvredkolone[6][6]-rezvredkolone[6][7])
-    bonus11=0
-    bonus22=0
-    bonus33=0
-    bonus44=0
-    bonus1=0
-    for i in range(6):
-        bonus1=bonus1+rezvredkolone[0][i]
-    if bonus1>=60:
-        bonus11=30
-    bonus2=0
+    brojbodova01=0
+    for i in range(0, 6):
+        brojbodova01=brojbodova01+rezvredkolone[0][i]
+    if brojbodova01>=60:
+        brojbodova01=brojbodova01+30
+    brojbodova02=rezvredkolone[0][0]*(rezvredkolone[0][6]-rezvredkolone[0][7])
+    if brojbodova02>=60:
+        brojbodova02=brojbodova02+30
+    brojbodova03=0
+    for i in range(8, 13):
+        brojbodova03=brojbodova03+rezvredkolone[0][i]
+    ukupno0=brojbodova01+brojbodova02+brojbodova03
+    ########################################################################################################
+    brojbodova11=0
     for i in range(7, 13):
-        bonus2=bonus2+rezvredkolone[1][i]
-    if bonus2>=60:
-        bonus22=30
-    bonus3=0
+        brojbodova11=brojbodova11+rezvredkolone[1][i]
+    if brojbodova11>=60:
+        brojbodova11=brojbodova11+30
+    brojbodova12=rezvredkolone[1][12]*(rezvredkolone[1][6]-rezvredkolone[1][5])
+    if brojbodova12>=60:
+        brojbodova12=brojbodova12+30
+    brojbodova13=0
+    for i in range(0, 5):
+        brojbodova13=brojbodova13+rezvredkolone[1][i]
+    ukupno1=brojbodova11+brojbodova12+brojbodova13
+    ########################################################################################################
+    brojbodova21=0
     for i in range(1, 7):
-        bonus3=bonus3+rezvredkolone[2][i]
-    if bonus3>=60:
-        bonus33=30
-    bonus4=0
-    for i in range(6):
-        bonus4=bonus4+rezvredkolone[5][i]
-    if bonus4>=60:
-        bonus44=30
-    ukupnobodova=brojbodova0+brojbodova1+brojbodova34+brojbodova56+brojbodovaslobodne+bonus11+bonus22+bonus33+bonus44
-    print(jedind)
-    print(dtcpsniz)
-    print(minind)
-    print(maxind)
-    print(rezvredkolone)
+        brojbodova21=brojbodova21+rezvredkolone[2][i]
+    if brojbodova21>=60:
+        brojbodova21=brojbodova21+30
+    brojbodova22=rezvredkolone[2][6]*(rezvredkolone[2][0]-rezvredkolone[3][0])
+    if brojbodova22>=60:
+        brojbodova22=brojbodova22+30
+    brojbodova23=0
+    for i in range(1, 6):
+        brojbodova23=brojbodova23+rezvredkolone[3][i]
+    ukupno2=brojbodova21+brojbodova22+brojbodova23
+    ########################################################################################################
+    brojbodova31=0
+    for i in range(0, 6):
+        brojbodova31=brojbodova31+rezvredkolone[4][i]
+    if brojbodova31>=60:
+        brojbodova31=brojbodova31+30
+    brojbodova32=rezvredkolone[4][0]*(rezvredkolone[4][6]-rezvredkolone[5][5])
+    if brojbodova32>=60:
+        brojbodova32=brojbodova32+30
+    brojbodova33=0
+    for i in range(0, 5):
+        brojbodova33=brojbodova33+rezvredkolone[5][i]
+    ukupno3=brojbodova31+brojbodova32+brojbodova33
+    #######################################################################################################
+    brojbodovas1=0
+    for i in range(len(dtcpsniz)):
+        brojbodovas1=brojbodovas1+rezvredkolone[6][dtcpsniz[i]]
+    if brojbodovas1>=60:
+        brojbodovas1=brojbodovas1+30
+    brojbodovas2=rezvredkolone[6][jedind]*(rezvredkolone[6][maxind]-rezvredkolone[6][minind])
+    donja=dtcpsniz
+    donja.append(minind)
+    donja.append(maxind)
+    donja.append(jedind)
+    vrednostis=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    otpad=[]
+    brojbodovas3=0
+    for i in range(len(vrednostis)):
+        for j in range(len(donja)):
+            if i==j:
+                otpad.append(vrednostis.pop(0))
+    for i in range(len(vrednostis)):
+        brojbodovas3=brojbodovas3+rezvredkolone[6][vrednostis[i]]
+    ukupnos=brojbodovas1+brojbodovas2+brojbodovas3
+    ukupno=ukupno0+ukupno1+ukupno2+ukupno3+ukupnos
 
-heuristika2()
+    return ukupno
 
-    
+s=time.time()
+print(heuristika2())
+print(time.time()-s)
+
