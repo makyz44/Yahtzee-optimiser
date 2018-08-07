@@ -364,7 +364,7 @@ def koef(bodovi, verovatnoca):
     return k
 
 
-def tezina(string):
+def tezina(string=None):
     t=0
     if string=="jednice":
         t=12
