@@ -191,7 +191,10 @@ def heuristika2():
 
     return ukupno
 
-s=time.time()
-print(heuristika2())
-print(time.time()-s)
+b=0
+for i in range(100):
+    l=heuristika2()
+    b=b+l
+    print("{0}   {1}".format(i+1, l))
+print("{0}   {1}".format("ukupno" ,b/100))
 
